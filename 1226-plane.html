@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="font/iconfont.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/1226-plane.css">
+</head>
+<body>
+<div id="wrap" class="wrap">
+    <ul id="bg" class="bg">
+        <li><img src="images/background_2.png" alt=""></li>
+        <li ><img id="begin_img" src="images/开始背景.png" alt=""></li>
+    </ul>
+    <div id="start" class="start">开始游戏</div>
+    <ul id="ctr" class="ctr">
+        <li id="s_t" class="iconfont icon-zantingbofang "></li>
+        <li class="score">score: <span id="scrore_in">0</span></li>
+        <li id="restart" class="iconfont icon-zhongxinkaishi"></li>
+    </ul>
+    <div class="bottom">
+        <div id="blood" class="hp">
+            <p class="hp-word">HP</p>
+            <div   class="blood">
+                <div id="blood_in" class="blood-in"></div>
+            </div>
+        </div>
+        <ul id="propbt" class="propbt">
+            <!--<li><img src="images/boom.png" alt=""></li>-->
+            <!--<li><img src="images/boom.png" alt=""></li>-->
+            <!--<li><img src="images/boom.png" alt=""></li>-->
+        </ul>
+    </div>
+    <div id="over_panel" class="over">
+        <p class="over-word">胜败乃兵家常事</p>
+        <p class="over-word">大侠请重头再来</p>
+        <p class="over-word">你当前得分为：<span id="over_score">0</span></p>
+        <button id="restart_new" class="restart">重新开始</button>
+    </div>
+</div>
+
+<script src="js/myFunc.js"></script>
+<script src="js/1226-plane.js"></script>
+</body>
+</html>
