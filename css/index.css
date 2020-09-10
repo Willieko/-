@@ -1,4 +1,4 @@
-.wrap{
+main{
     width: 320px;
     height: 568px;
     position: absolute;
@@ -14,6 +14,7 @@
     top:-568px;
     transition: top 10s;
 }
+/*背景滚动的动画*/
 @keyframes bg {
     from{
         top:-568px;
@@ -27,52 +28,61 @@
     height: 100%;
     vertical-align: top;
 }
+/*开始按钮*/
 .start{
     width: 120px;
     height: 42px;
-    background-color: #969696;
+    border-radius: 20px;
+    background-color: #a9a9a9;
     position: absolute;
     left: calc(50% - 60px);
     top: 300px;
     text-align: center;
     line-height: 40px;
-    font-size: 24px;
+    font-size: 22px;
     cursor: pointer;
+    color: #f1f1f1;
+    border: 4px solid #f1f1f1;
 }
-.start:hover{
-    background-color: #7a7a7a;
-    color: #ffffff;
-}
-.ctr{
+
+/*顶部操作栏*/
+.ctrl{
     position: absolute;
     left: 0;
     top: 10px;
     width: 100%;
     height: 35px;
-    display: flex;
     z-index: 9;
+    display: flex;
+    align-items: center;
     justify-content: space-between;
-    box-sizing: border-box;
     padding: 0 10px;
+    box-sizing: border-box;
     opacity: 0;
-    line-height: 35px;
 }
-.ctr .iconfont{
+/*操作栏的图标*/
+.ctrl .iconfont{
     font-size: 28px;
-
     color: #797979;
     cursor: pointer;
-
 }
-.ctr .iconfont:hover{
+.ctrl .iconfont:hover{
+    transform: scale(1.1);
     color: #626262;
+}
+/*得分*/
+.score-line{
+    display: flex;
+    align-items: center;
 }
 .score{
     color: #444444;
     font-size: 22px;
     font-weight: bolder;
+    margin-left: 5px;
 }
-.bottom{
+/*底部状态栏*/
+.bottom-line{
     width: 100%;
     height: 25px;
     position: absolute;
@@ -80,25 +90,23 @@
     bottom: 0;
     overflow: hidden;
     z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 10px;
 }
 .hp{
-    position: relative;
-    float: left;
     height: 25px;
-    line-height: 25px;
-    color: #4f4f4f;
-    margin-left: 3px;
+    display: flex;
+    align-items: center;
     display: none;
 }
-.hp-word{
-    float: left;
-}
+/*血条*/
 .blood{
     position: relative;
-    margin-top: 9px;
     margin-left: 5px;
     float: right;
-    width: 160px;
+    width: 150px;
     height: 6px;
     background-color: #868686;
 }
@@ -106,29 +114,24 @@
     position: absolute;
     left: 0;
     top: 0;
-    background-color: #4f4f4f;
-    width: 160px;
+    background-color: #f20919;
+    width: 150px;
     height: 6px;
 }
-.propbt{
-    float: right;
+/*道具*/
+.prop{
     width: 100px;
     height: 25px;
-
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-left: 20px;
 }
-.propbt li{
-    width: 30px;
-    height: 25px;
-    float: left;
-    margin-left: 5px;
+.prop div img{
+    height: 20px;
 }
-.propbt li:nth-child(1){
-    margin-left: 0;
-}
-.propbt li img{
-    height: 80%;
-}
-.over{
+/*失败后的提示框*/
+.over-panel{
     position: absolute;
     width: 200px;
     height: 230px;
@@ -149,7 +152,7 @@
     font-style: italic;
     line-height: 30px;
 }
-.restart{
+.restart-new{
     outline: none;
     margin-top: 25px;
     width: 160px;
@@ -161,8 +164,4 @@
     border-radius: 6px;
     font-style: italic;
     cursor: pointer;
-}
-.over-word:nth-child(3){
-    margin: 20px 0 ;
-    color: #000000;
 }

@@ -1,0 +1,44 @@
+{
+  "id": "",
+  "name": "",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "1372216",
+      "name": "金币",
+      "font_class": "15",
+      "unicode": "e639",
+      "unicode_decimal": 58937
+    },
+    {
+      "icon_id": "6092025",
+      "name": "重新开始",
+      "font_class": "zhongxinkaishi",
+      "unicode": "e619",
+      "unicode_decimal": 58905
+    },
+    {
+      "icon_id": "10114171",
+      "name": "关 闭",
+      "font_class": "guanbi",
+      "unicode": "e503",
+      "unicode_decimal": 58627
+    },
+    {
+      "icon_id": "10700553",
+      "name": "播放",
+      "font_class": "bofang",
+      "unicode": "e60a",
+      "unicode_decimal": 58890
+    },
+    {
+      "icon_id": "16209850",
+      "name": "暂停 停止",
+      "font_class": "zantingtingzhi",
+      "unicode": "e508",
+      "unicode_decimal": 58632
+    }
+  ]
+}

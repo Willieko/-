@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>飞机大战</title>
+    <link rel="stylesheet" href="iconfont/iconfont.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<!--主体范围-->
+<main id="main">
+    <!--背景-->
+    <ul id="bg" class="bg">
+        <li>
+            <img src="imgs/background.png" alt="">
+        </li>
+        <li>
+            <img id="begin_img" src="imgs/start-bg.png" alt="">
+        </li>
+    </ul>
+
+    <!--开始游戏按钮-->
+    <div id="start" class="start">开始游戏</div>
+
+    <!--顶部状态栏-->
+    <ul id="ctrl" class="ctrl">
+        <li id="state" class="iconfont icon-zantingtingzhi"></li>
+        <li class="score-line">
+            <i class="iconfont icon-15"></i>
+            <span id="score" class="score">0</span>
+        </li>
+        <li id="restart" class="iconfont icon-zhongxinkaishi"></li>
+    </ul>
+
+    <!--底部状态栏-->
+    <ul class="bottom-line">
+        <!--血条-->
+        <li id="hp" class="hp">
+            <p class="hp-wording">HP</p>
+            <div class="blood">
+                <div id="blood_in" class="blood-in"></div>
+            </div>
+        </li>
+
+        <!--道具-->
+        <li id="prop" class="prop">
+            <!--<div><img src="imgs/boom.png" alt=""></div>-->
+            <!--<div><img src="imgs/boom.png" alt=""></div>-->
+            <!--<div><img src="imgs/boom.png" alt=""></div>-->
+        </li>
+    </ul>
+
+    <div id="over_panel" class="over-panel">
+        <p class="over-word">胜败乃兵家常事</p>
+        <p class="over-word">你当前得分为：<span id="over_score">0</span></p>
+        <button id="restart_new" class="restart-new">重新开始</button>
+    </div>
+</main>
+
+<script src="js/myFunc.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
