@@ -41,7 +41,7 @@ window.onload = function () {
     //点击控制进度事件
     eventUtil.add($('ctrl'),'click', changeState)
     //重新开始
-    eventUtil.add($('restart_new'),'click',restart)
+    eventUtil.add($('restart_new'),'click', restart)
 
 
     /**
@@ -54,6 +54,8 @@ window.onload = function () {
         $('begin_img').src = 'imgs/background.png'
         // 隐藏开始游戏的按钮
         $('start').style.display = 'none'
+        // 隐藏操作提示框
+        $('tips').style.display = 'none'
         // 显示顶部操作栏
         $('ctrl').style.opacity = 1
         // 隐藏提示框
@@ -83,21 +85,8 @@ window.onload = function () {
         //吃道具
         setInterval(eat,20)
 
-        //敌机1产生
-        enemy1timer = setInterval(function () {
-            enemy1 = new Enemy(Math.floor(Math.random()*280),-30,1,'imgs/enemy1.png')
-            enemys.push(enemy1)
-        },5000)
-        //敌机2产生
-        enemy2timer = setInterval(function () {
-            enemy2 = new Enemy(Math.floor(Math.random()*250),-164,150,'imgs/enemy2.png')
-            enemys.push(enemy2)
-        },10000)
-        //敌机3产生
-        enemy3timer = setInterval(function () {
-            enemy3 = new Enemy(Math.floor(Math.random()*250),-60,60,'imgs/enemy3.png')
-            enemys.push(enemy3)
-        },15000)
+        // 敌机的产生
+        createEnemys()
 
         //道具的产生
         proptimer = setInterval(function () {
@@ -146,33 +135,22 @@ window.onload = function () {
             }else{
                 target.className = 'iconfont icon-zantingtingzhi'
                 $('bg').style.animationPlayState = "running"
-                enemyMoveTimer = setInterval(enemyFly,20)
 
-                //敌机1产生
-                enemy1timer = setInterval(function () {
-                    enemy1 = new Enemy(Math.floor(Math.random()*280),-30,1,'imgs/enemy1.png',10)
-                    enemys.push(enemy1)
-                },5000)
-                //敌机2产生
-                enemy2timer = setInterval(function () {
-                    enemy2 = new Enemy(Math.floor(Math.random()*250),-164,150,'imgs/enemy2.png',50)
-                    enemys.push(enemy2)
-                },10000)
-                //敌机3产生
-                enemy3timer = setInterval(function () {
-                    enemy3 = new Enemy(Math.floor(Math.random()*250),-60,60,'imgs/enemy3.png',100)
-                    enemys.push(enemy3)
-                },15000)
+                // 恢复敌机的移动
+                enemyMoveTimer = setInterval(enemyFly,20)
+                // 恢复敌机的产生
+                createEnemys()
+                // 恢复道具的移动
+                propMoveTimer =  setInterval(propMove,20)
+                // 恢复道具的产生
+                proptimer = setInterval(function () {
+                    prop = new Prop(Math.floor(Math.random()*250),-100,'imgs/prop.png',1)
+                    props.push(prop)
+                },20000)
             }
             flag = !flag
         } else if(target == $('restart')){
-            $('begin_img').src = 'imgs/start-bg.png'
-            $('start').style.display = 'block'
-            $('ctrl').style.opacity = 0
-            $('state').className = 'iconfont icon-zantingtingzhi'
-            flag = true
-            $('myPlane').remove()
-            $('bg').style.animation = "null"
+            restart()
         }
     }
 
@@ -180,15 +158,60 @@ window.onload = function () {
      * 重新开始游戏
      */
     function restart() {
+        // 清除玩家飞机移动的定时器
+        clearInterval(planMoveTimer)
+        // 清除射击的定时器
+        clearInterval(shootTimer)
+        // 清除敌机移动的定时器
+        clearInterval(enemyMoveTimer)
+        // 清除敌机1移动的定时器
+        clearInterval(enemy1timer)
+        // 清除敌机2移动的定时器
+        clearInterval(enemy2timer)
+        // 清除敌机3移动的定时器
+        clearInterval(enemy3timer)
+        // 清除生产道具的定时器
+        clearInterval(proptimer)
+        // 清除道具移动的定时器
+        clearInterval(propMoveTimer)
+        // 清除大招射击的定时器
+        clearInterval(bigshootTimer)
+        // 清除大招移动的的定时器
+        clearInterval(bigBulletMoveTimer)
+
+        // 清空敌机、子弹、道具
         enemys = []
         props = []
         bullets = []
-        $('myPlane').remove()
-        var imgs = document.getElementsByClassName('imgs')
-        for (var i=0; i<imgs.length; i++){
+
+        // 清空html中所有的classname叫imgs的图片
+        var imgs = $('main').getElementsByClassName('imgs')
+        console.log(imgs, 'imgs', imgs.length)
+        for (var i=0; i < imgs.length; i++){
             imgs[i].remove()
+            i--
         }
-        startGame()
+
+        // 将背景改成开始游戏的背景
+        $('begin_img').src = 'imgs/start-bg.png'
+        // 显示开始游戏按钮
+        $('start').style.display = 'block'
+        // 隐藏顶部操作栏
+        $('ctrl').style.opacity = 0
+        // 重置状态图标的样式
+        $('state').className = 'iconfont icon-zantingtingzhi'
+        // 隐藏提示游戏结束的弹窗
+        $('over_panel').style.display = 'none'
+        // 显示操作提示框
+        $('tips').style.display = 'block'
+        // 隐藏血量
+        $('hp').style.display = 'none'
+        // 改变游戏的状态
+        flag = true
+        // 移除玩家飞机
+        $('myPlane').remove()
+        // 清除背景移动的css动画
+        $('bg').style.animation = 'null'
     }
 
     /**
@@ -220,7 +243,7 @@ window.onload = function () {
         clearInterval(bigBulletMoveTimer)
 
         // 清除背景移动的css动画
-        $('bg').style.animation = "null"
+        $('bg').style.animation = 'null'
         // 显示提示游戏结束的弹窗
         $('over_panel').style.display = 'block'
     }
@@ -437,7 +460,7 @@ window.onload = function () {
                         plane.help =3
                     }
                     if ($('prop').children.length < 3){
-                        $('prop').innerHTML += '<div><img src="imgs/boom.png" ></div>'
+                        $('prop').innerHTML += '<div><img src="imgs/boom.png" alt=""></div>'
                     }
                 }
             }
@@ -542,7 +565,27 @@ window.onload = function () {
                 bigBullet = null
             }
         }
+    }
 
+    /**
+     * 三种敌机的产生
+     */
+    function createEnemys() {
+        //敌机1产生
+        enemy1timer = setInterval(function () {
+            enemy1 = new Enemy(Math.floor(Math.random()*280),-30,1,'imgs/enemy1.png')
+            enemys.push(enemy1)
+        },5000)
+        //敌机2产生
+        enemy2timer = setInterval(function () {
+            enemy2 = new Enemy(Math.floor(Math.random()*250),-164,60,'imgs/enemy2.png')
+            enemys.push(enemy2)
+        },10000)
+        //敌机3产生
+        enemy3timer = setInterval(function () {
+            enemy3 = new Enemy(Math.floor(Math.random()*250),-60,140,'imgs/enemy3.png')
+            enemys.push(enemy3)
+        },20000)
     }
 
     /**
